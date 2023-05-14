@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: blueColor,
         useMaterial3: true,
         appBarTheme: AppBarTheme(
-          backgroundColor: blueColor,
+          backgroundColor: whiteColor,
           elevation: 0,
           centerTitle: true,
           iconTheme: IconThemeData(color: blackColor),

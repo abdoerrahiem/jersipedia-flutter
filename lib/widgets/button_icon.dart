@@ -25,7 +25,7 @@ class ButtonIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
+    return Container(
       height: iconHeight ?? 45,
       width: iconWidth ?? 45,
       decoration: ShapeDecoration(
