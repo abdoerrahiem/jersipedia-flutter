@@ -17,16 +17,19 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        homeHeader(activeSliderIndex, (value) {
-          setState(() {
-            activeSliderIndex = value + 1;
-          });
-        }),
-        homeLeague(context),
-        homeProducts(context),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 50, child: Container(color: blueColor)),
+          homeHeader(activeSliderIndex, (value) {
+            setState(() {
+              activeSliderIndex = value + 1;
+            });
+          }),
+          homeLeague(context),
+          homeProducts(context),
+        ],
+      ),
     );
   }
 }

@@ -11,35 +11,38 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController(text: '');
 
-    return ListView(
-      children: [
-        Container(
-          color: whiteColor,
-          child: Container(
-            color: blueColor,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 5,
-                  ),
-                  child: TextInput(
-                    controller: searchController,
-                    placeholder: 'Cari Jersey...',
-                    lelftIcon: const Icon(
-                      Icons.search,
-                      size: 30,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 60, child: Container(color: blueColor)),
+          Container(
+            color: whiteColor,
+            child: Container(
+              color: blueColor,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 5,
+                    ),
+                    child: TextInput(
+                      controller: searchController,
+                      placeholder: 'Cari Jersey...',
+                      lelftIcon: const Icon(
+                        Icons.search,
+                        size: 30,
+                      ),
                     ),
                   ),
-                ),
-                searchLeague(context),
-              ],
+                  searchLeague(context),
+                ],
+              ),
             ),
           ),
-        ),
-        searchResult(),
-      ],
+          searchResult(),
+        ],
+      ),
     );
   }
 }
@@ -60,28 +63,6 @@ Widget searchLeague(BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              children: [
-                Text(
-                  'Pilih ',
-                  style: blackTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: fontWeightBold,
-                  ),
-                ),
-                Text(
-                  'Liga',
-                  style: whiteTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: fontWeightBold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: 10),

@@ -30,11 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      backgroundColor: whiteColor,
       body: Container(
-        decoration: BoxDecoration(
-          color: blueColor,
-          borderRadius: BorderRadius.circular(50),
-        ),
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: ClipRRect(
