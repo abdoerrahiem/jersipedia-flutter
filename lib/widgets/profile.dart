@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jersipedia/utils/theme.dart';
+import 'package:jersipedia/widgets/profile_button.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -12,6 +13,7 @@ class Profile extends StatelessWidget {
         children: [
           SizedBox(height: 50, child: Container(color: blueColor)),
           profileHeader(),
+          profileButtons(),
         ],
       ),
     );
@@ -88,5 +90,33 @@ Widget profileHeader() {
         ),
       ],
     ),
+  );
+}
+
+Widget profileButtons() {
+  return Column(
+    children: [
+      const SizedBox(height: 20),
+      ProfileButton(
+        icon: Icons.manage_accounts,
+        title: 'Ubah Profil',
+        onPress: () {},
+      ),
+      ProfileButton(
+        icon: Icons.lock,
+        title: 'Ubah Password',
+        onPress: () {},
+      ),
+      ProfileButton(
+        icon: Icons.history,
+        title: 'History Checkout',
+        onPress: () {},
+      ),
+      ProfileButton(
+        icon: Icons.logout,
+        title: 'Keluar',
+        onPress: () {},
+      ),
+    ],
   );
 }
