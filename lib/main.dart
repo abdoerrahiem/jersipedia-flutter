@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jersipedia/screens/home_screen.dart';
+import 'package:jersipedia/screens/login_screen.dart';
 import 'package:jersipedia/utils/theme.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: blueColor,
+        scaffoldBackgroundColor: whiteColor,
         useMaterial3: true,
         appBarTheme: AppBarTheme(
           backgroundColor: whiteColor,
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/': (context) => const LoginScreen(),
       },
     );
   }
