@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:jersipedia/screens/cart_screen.dart';
 import 'package:jersipedia/screens/home_screen.dart';
 import 'package:jersipedia/screens/login_screen.dart';
+import 'package:jersipedia/screens/product_detail_screen.dart';
+import 'package:jersipedia/screens/register_address.dart';
+import 'package:jersipedia/screens/register_screen.dart';
 import 'package:jersipedia/utils/theme.dart';
 
 void main() {
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const LoginScreen(),
+        '/': (context) => const CartScreen(),
       },
     );
   }

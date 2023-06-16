@@ -2,14 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:jersipedia/utils/theme.dart';
 
 class LeagueCard extends StatelessWidget {
-  const LeagueCard({super.key});
+  final Color? backgroundColor;
+  final double? borderWidth;
+  final Color? borderColor;
+
+  const LeagueCard({
+    super.key,
+    this.backgroundColor,
+    this.borderWidth,
+    this.borderColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 7),
       decoration: BoxDecoration(
-          color: whiteColor, borderRadius: BorderRadius.circular(10)),
+        color: backgroundColor ?? whiteColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: borderColor ?? Colors.transparent,
+          width: borderWidth ?? 0,
+        ),
+      ),
       child: IconButton(
         onPressed: () {},
         icon: Image.asset(
