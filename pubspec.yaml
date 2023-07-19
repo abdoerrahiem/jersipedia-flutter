@@ -38,6 +38,7 @@ dependencies:
   flutter_native_splash: ^2.2.19
   google_fonts: ^4.0.4
   carousel_slider: ^4.2.1
+  intl: ^0.18.1
 
 flutter_launcher_icons:
   image_path: 'assets/icons/icon.png'

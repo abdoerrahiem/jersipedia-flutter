@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/cart_item.dart';
 
-class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+class CheckoutScreen extends StatelessWidget {
+  const CheckoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class CartScreen extends StatelessWidget {
       backgroundColor: blueColor,
       appBar: AppBar(
         title: Text(
-          'My Cart',
+          'Checkout',
           style: whiteTextStyle.copyWith(
             fontSize: 16,
             fontWeight: fontWeightBlack,
@@ -46,15 +46,7 @@ class CartScreen extends StatelessWidget {
               vertical: 15,
             ),
             children: [
-              CartItem(
-                name: 'Real Madrid 3rd 2023/2024',
-                price: 50000,
-                size: 'XL',
-                qty: 2,
-                imageUrl:
-                    'https://images.unsplash.com/photo-1635710064268-69aa5d9355c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJlYWwlMjBtYWRyaWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60',
-                onDelete: () {},
-              ),
+              //
             ],
           ),
           Positioned(
@@ -94,7 +86,7 @@ class CartScreen extends StatelessWidget {
                         Icons.shopping_cart,
                         color: whiteColor,
                       ),
-                      label: Text('Checkout',
+                      label: Text('Bayar',
                           style: whiteTextStyle.copyWith(fontSize: 16)),
                       style: ButtonStyle(
                         padding: MaterialStateProperty.all<EdgeInsets>(

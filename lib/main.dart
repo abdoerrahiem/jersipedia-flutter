@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jersipedia/screens/cart_screen.dart';
+import 'package:jersipedia/screens/checkout_screen.dart';
 import 'package:jersipedia/screens/home_screen.dart';
 import 'package:jersipedia/screens/login_screen.dart';
 import 'package:jersipedia/screens/product_detail_screen.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const CartScreen(),
+        '/': (context) => const CheckoutScreen(),
       },
     );
   }
