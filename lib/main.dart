@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jersipedia/screens/cart_screen.dart';
 import 'package:jersipedia/screens/checkout_screen.dart';
+import 'package:jersipedia/screens/history_checkout_screen.dart';
 import 'package:jersipedia/screens/home_screen.dart';
 import 'package:jersipedia/screens/login_screen.dart';
 import 'package:jersipedia/screens/product_detail_screen.dart';
 import 'package:jersipedia/screens/register_address.dart';
 import 'package:jersipedia/screens/register_screen.dart';
+import 'package:jersipedia/screens/update_password_screen.dart';
+import 'package:jersipedia/screens/update_profile_screen.dart';
 import 'package:jersipedia/screens/webview_screen.dart';
 import 'package:jersipedia/utils/theme.dart';
 
@@ -35,10 +38,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const WebviewScreen(
-              title: 'Lanjutkan Pembayaran',
-              uri: 'https://google.com',
-            ),
+        '/': (context) => const HistoryCheckoutScreen(),
       },
     );
   }
