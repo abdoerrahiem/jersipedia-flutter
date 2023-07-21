@@ -6,6 +6,7 @@ import 'package:jersipedia/screens/login_screen.dart';
 import 'package:jersipedia/screens/product_detail_screen.dart';
 import 'package:jersipedia/screens/register_address.dart';
 import 'package:jersipedia/screens/register_screen.dart';
+import 'package:jersipedia/screens/webview_screen.dart';
 import 'package:jersipedia/utils/theme.dart';
 
 void main() {
@@ -34,7 +35,10 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const CheckoutScreen(),
+        '/': (context) => const WebviewScreen(
+              title: 'Lanjutkan Pembayaran',
+              uri: 'https://google.com',
+            ),
       },
     );
   }
