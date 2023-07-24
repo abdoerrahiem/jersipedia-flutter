@@ -11,6 +11,10 @@ class CartScreen extends StatelessWidget {
       Navigator.pop(context);
     }
 
+    void onCheckout() {
+      Navigator.pushNamed(context, '/checkout');
+    }
+
     return Scaffold(
       backgroundColor: blueColor,
       appBar: AppBar(
@@ -93,7 +97,7 @@ class CartScreen extends StatelessWidget {
                       ],
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: onCheckout,
                       icon: Icon(
                         Icons.shopping_cart,
                         color: whiteColor,
