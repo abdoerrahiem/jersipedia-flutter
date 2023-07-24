@@ -15,6 +15,14 @@ class _LoginScreenState extends State<LoginScreen> {
     final TextEditingController emailController =
         TextEditingController(text: '');
 
+    void onLogin() {
+      Navigator.pushNamed(context, '/home');
+    }
+
+    void onRegister() {
+      Navigator.pushNamed(context, '/register');
+    }
+
     return Scaffold(
       backgroundColor: blueColor,
       body: Stack(
@@ -47,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onLogin,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
@@ -76,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Align(
                 alignment: Alignment.center,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onRegister,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
                     elevation: 0,

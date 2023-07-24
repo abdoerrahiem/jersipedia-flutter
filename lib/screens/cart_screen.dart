@@ -7,6 +7,10 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onBack() {
+      Navigator.pop(context);
+    }
+
     return Scaffold(
       backgroundColor: blueColor,
       appBar: AppBar(
@@ -33,7 +37,7 @@ class CartScreen extends StatelessWidget {
                 icon: const Icon(Icons.chevron_left),
                 color: blueColor,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: onBack,
               ),
             ),
           ],

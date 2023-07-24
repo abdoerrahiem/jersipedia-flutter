@@ -5,12 +5,14 @@ class LeagueCard extends StatelessWidget {
   final Color? backgroundColor;
   final double? borderWidth;
   final Color? borderColor;
+  final VoidCallback onPressed;
 
   const LeagueCard({
     super.key,
     this.backgroundColor,
     this.borderWidth,
     this.borderColor,
+    required this.onPressed,
   });
 
   @override
@@ -26,7 +28,7 @@ class LeagueCard extends StatelessWidget {
         ),
       ),
       child: IconButton(
-        onPressed: () {},
+        onPressed: onPressed,
         icon: Image.asset(
           'assets/images/laliga.png',
           height: MediaQuery.of(context).size.width / 6,

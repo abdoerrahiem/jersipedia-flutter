@@ -6,7 +6,9 @@ import 'package:jersipedia/widgets/league_card.dart';
 import 'package:jersipedia/widgets/product_card.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final Function(int) setIndex;
+
+  const Home({super.key, required this.setIndex});
 
   @override
   State<Home> createState() => _HomeState();
@@ -25,8 +27,8 @@ class _HomeState extends State<Home> {
             setState(() {
               activeSliderIndex = value + 1;
             });
-          }),
-          homeLeague(context),
+          }, context),
+          homeLeague(context, widget.setIndex),
           homeProducts(context),
         ],
       ),
@@ -34,7 +36,16 @@ class _HomeState extends State<Home> {
   }
 }
 
-Widget homeHeader(int activeSliderIndex, Function(int) handleSlide) {
+Widget homeHeader(
+    int activeSliderIndex, Function(int) handleSlide, BuildContext context) {
+  void onCart() {
+    Navigator.pushNamed(context, '/cart');
+  }
+
+  void onProduct() {
+    Navigator.pushNamed(context, '/product');
+  }
+
   return Container(
     color: blueColor,
     child: Column(
@@ -67,7 +78,7 @@ Widget homeHeader(int activeSliderIndex, Function(int) handleSlide) {
               ButtonIcon(
                 iconName: 'assets/icons/cart.png',
                 chipNumber: 100,
-                handlePress: () {},
+                handlePress: onCart,
               ),
             ],
           ),
@@ -82,11 +93,14 @@ Widget homeHeader(int activeSliderIndex, Function(int) handleSlide) {
           items: [1, 2, 3].map((i) {
             return Builder(
               builder: (BuildContext context) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Image.asset(
-                    'assets/images/image_slider.png',
-                    fit: BoxFit.contain,
+                return GestureDetector(
+                  onTap: onProduct,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    child: Image.asset(
+                      'assets/images/image_slider.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 );
               },
@@ -109,13 +123,13 @@ Widget homeHeader(int activeSliderIndex, Function(int) handleSlide) {
                 ),
               )
               .toList(),
-        )
+        ),
       ],
     ),
   );
 }
 
-Widget homeLeague(BuildContext context) {
+Widget homeLeague(BuildContext context, Function(int) setIndex) {
   return Container(
     color: whiteColor,
     padding: const EdgeInsets.only(bottom: 20),
@@ -168,7 +182,9 @@ Widget homeLeague(BuildContext context) {
                 8,
               ]
                   .map(
-                    (item) => const LeagueCard(),
+                    (item) => LeagueCard(onPressed: () {
+                      setIndex(1);
+                    }),
                   )
                   .toList(),
             ),

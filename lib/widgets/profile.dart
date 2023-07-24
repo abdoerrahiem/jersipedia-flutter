@@ -13,7 +13,7 @@ class Profile extends StatelessWidget {
         children: [
           SizedBox(height: 50, child: Container(color: blueColor)),
           profileHeader(),
-          profileButtons(),
+          profileButtons(context),
         ],
       ),
     );
@@ -93,29 +93,37 @@ Widget profileHeader() {
   );
 }
 
-Widget profileButtons() {
+Widget profileButtons(BuildContext context) {
   return Column(
     children: [
       const SizedBox(height: 20),
       ProfileButton(
         icon: Icons.manage_accounts,
         title: 'Ubah Profil',
-        onPress: () {},
+        onPress: () {
+          Navigator.pushNamed(context, '/change-profile');
+        },
       ),
       ProfileButton(
         icon: Icons.lock,
         title: 'Ubah Password',
-        onPress: () {},
+        onPress: () {
+          Navigator.pushNamed(context, '/change-password');
+        },
       ),
       ProfileButton(
         icon: Icons.history,
         title: 'History Checkout',
-        onPress: () {},
+        onPress: () {
+          Navigator.pushNamed(context, '/history-checkout');
+        },
       ),
       ProfileButton(
         icon: Icons.logout,
         title: 'Keluar',
-        onPress: () {},
+        onPress: () {
+          Navigator.pushNamed(context, '/');
+        },
       ),
     ],
   );

@@ -54,6 +54,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
 Widget productHeader(BuildContext context, List<Map<String, dynamic>> items,
     Map<String, dynamic> item, Function(int) onPageChanged) {
+  void onBack() {
+    Navigator.pop(context);
+  }
+
   return Stack(
     children: [
       Container(
@@ -112,7 +116,7 @@ Widget productHeader(BuildContext context, List<Map<String, dynamic>> items,
             shape: BoxShape.circle,
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: onBack,
             padding: const EdgeInsets.all(7),
             icon: Icon(
               Icons.chevron_left,
@@ -159,6 +163,7 @@ Widget productDetail(TextEditingController descriptionController) {
               backgroundColor: whiteColor,
               borderWidth: 1,
               borderColor: blueColor,
+              onPressed: () {},
             ),
           ],
         ),

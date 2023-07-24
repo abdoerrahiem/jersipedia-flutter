@@ -38,7 +38,20 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => const HistoryCheckoutScreen(),
+        '/': (context) => const LoginScreen(),
+        '/register': (context) => const RegisterScreen(),
+        '/register-address': (context) => const RegisterAddress(),
+        '/home': (context) => const HomeScreen(),
+        '/product': (context) => const ProductDetailScreen(),
+        '/cart': (context) => const CartScreen(),
+        '/checkout': (context) => const CheckoutScreen(),
+        '/history-checkout': (context) => const HistoryCheckoutScreen(),
+        '/change-profile': (context) => const UpdateProfileScreen(),
+        '/change-password': (context) => const UpdatePasswordScreen(),
+        '/webview': (context) => const WebviewScreen(
+              title: 'Lanjutkan Pembayaran',
+              uri: 'https://google.com',
+            ),
       },
     );
   }

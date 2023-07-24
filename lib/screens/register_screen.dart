@@ -21,6 +21,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final TextEditingController passwordController =
         TextEditingController(text: '');
 
+    void onContinue() {
+      Navigator.pushNamed(context, '/register-address');
+    }
+
     return Scaffold(
       backgroundColor: blueColor,
       body: ListView(
@@ -64,7 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Align(
             alignment: Alignment.centerRight,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onContinue,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 elevation: 0,

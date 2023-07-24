@@ -14,12 +14,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _widgetOptions = const <Widget>[
-    Home(),
-    Search(),
-    Profile(),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -32,7 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
       extendBody: true,
       backgroundColor: whiteColor,
       body: Container(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _selectedIndex == 0
+            ? Home(
+                setIndex: _onItemTapped,
+              )
+            : _selectedIndex == 1
+                ? const Search()
+                : const Profile(),
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(

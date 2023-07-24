@@ -22,113 +22,164 @@ class HistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          margin:
-              const EdgeInsets.only(left: 20, right: 20, bottom: 10, top: 15),
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: whiteColor,
+    return Container(
+      margin: const EdgeInsets.only(
+        bottom: 15,
+        left: 20,
+        right: 20,
+      ),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 1,
+          color: whiteColor,
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Senin, 24 Juli 2023',
+            style: whiteTextStyle.copyWith(
+              fontWeight: fontWeightSemiBold,
+              fontSize: 16,
             ),
-            borderRadius: BorderRadius.circular(10),
           ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  imageUrl,
-                  width: 70,
-                  height: 70,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: whiteTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: fontWeightSemiBold,
+          const SizedBox(height: 15),
+          Column(
+            children: [1, 2, 3]
+                .map(
+                  (e) => Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '1. ',
+                          style: whiteTextStyle.copyWith(
+                            fontWeight: fontWeightSemiBold,
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            imageUrl,
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name,
+                              style: whiteTextStyle.copyWith(
+                                fontWeight: fontWeightSemiBold,
+                              ),
+                            ),
+                            Text(
+                              formatRupiah(price),
+                              style: whiteTextStyle.copyWith(),
+                            ),
+                            const SizedBox(height: 5),
+                            Row(
+                              children: [
+                                Text(
+                                  'Jumlah: ',
+                                  style: whiteTextStyle.copyWith(),
+                                ),
+                                Text(
+                                  '$qty',
+                                  style: whiteTextStyle.copyWith(
+                                    fontWeight: fontWeightSemiBold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Total Harga: ',
+                                  style: whiteTextStyle.copyWith(),
+                                ),
+                                Text(
+                                  formatRupiah(qty * price),
+                                  style: whiteTextStyle.copyWith(
+                                    fontWeight: fontWeightSemiBold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    formatRupiah(price),
-                    style: whiteTextStyle.copyWith(),
+                )
+                .toList(),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Status:',
+                  style: whiteTextStyle.copyWith(
+                    fontWeight: fontWeightSemiBold,
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Text(
-                        'Jumlah: ',
-                        style: whiteTextStyle.copyWith(),
-                      ),
-                      Text(
-                        '$qty',
-                        style: whiteTextStyle.copyWith(
-                          fontWeight: fontWeightSemiBold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Ukuran: ',
-                        style: whiteTextStyle.copyWith(),
-                      ),
-                      Text(
-                        size,
-                        style: whiteTextStyle.copyWith(
-                          fontWeight: fontWeightSemiBold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Total Harga: ',
-                        style: whiteTextStyle.copyWith(),
-                      ),
-                      Text(
-                        formatRupiah(qty * price),
-                        style: whiteTextStyle.copyWith(
-                          fontWeight: fontWeightSemiBold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
+              ),
+              Text(
+                'Lunas',
+                style: whiteTextStyle.copyWith(
+                  fontWeight: fontWeightSemiBold,
+                ),
               ),
             ],
           ),
-        ),
-        Positioned(
-          right: 10,
-          top: 0,
-          child: Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              color: redColor,
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              onPressed: () {},
-              icon: const Icon(Icons.close),
-              color: whiteColor,
-              iconSize: 20,
-            ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Ongkir (2-3 hari):',
+                  style: whiteTextStyle.copyWith(
+                    fontWeight: fontWeightSemiBold,
+                  ),
+                ),
+              ),
+              Text(
+                'Rp 15.000',
+                style: whiteTextStyle.copyWith(
+                  fontWeight: fontWeightSemiBold,
+                ),
+              ),
+            ],
           ),
-        ),
-      ],
+          const SizedBox(height: 10),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Total Harga:',
+                  style: whiteTextStyle.copyWith(
+                    fontWeight: fontWeightSemiBold,
+                  ),
+                ),
+              ),
+              Text(
+                'Rp 215.000',
+                style: whiteTextStyle.copyWith(
+                  fontWeight: fontWeightSemiBold,
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

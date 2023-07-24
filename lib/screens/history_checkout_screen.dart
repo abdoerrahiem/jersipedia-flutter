@@ -33,7 +33,9 @@ class HistoryCheckoutScreen extends StatelessWidget {
                 icon: const Icon(Icons.chevron_left),
                 color: blueColor,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ),
           ],
@@ -44,6 +46,15 @@ class HistoryCheckoutScreen extends StatelessWidget {
           vertical: 15,
         ),
         children: [
+          HistoryItem(
+            name: 'Real Madrid 3rd 2023/2024',
+            price: 50000,
+            size: 'XL',
+            qty: 2,
+            imageUrl:
+                'https://images.unsplash.com/photo-1635710064268-69aa5d9355c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJlYWwlMjBtYWRyaWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60',
+            onDelete: () {},
+          ),
           HistoryItem(
             name: 'Real Madrid 3rd 2023/2024',
             price: 50000,

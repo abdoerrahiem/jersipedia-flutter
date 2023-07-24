@@ -78,7 +78,9 @@ Widget searchLeague(BuildContext context) {
                 8,
               ]
                   .map(
-                    (item) => const LeagueCard(),
+                    (item) => LeagueCard(
+                      onPressed: () {},
+                    ),
                   )
                   .toList(),
             ),

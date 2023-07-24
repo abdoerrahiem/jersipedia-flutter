@@ -6,6 +6,10 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onProduct() {
+      Navigator.pushNamed(context, '/product');
+    }
+
     return Container(
       width: MediaQuery.of(context).size.width / 2.3,
       padding: const EdgeInsets.all(10),
@@ -44,7 +48,7 @@ class ProductCard extends StatelessWidget {
               ),
               const Spacer(),
               TextButton(
-                onPressed: () {},
+                onPressed: onProduct,
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(blueColor),
                   overlayColor:

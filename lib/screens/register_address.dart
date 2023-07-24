@@ -15,6 +15,10 @@ class _RegisterAddressState extends State<RegisterAddress> {
     final TextEditingController addressController =
         TextEditingController(text: '');
 
+    void onContinue() {
+      Navigator.pushNamed(context, '/');
+    }
+
     return Scaffold(
       backgroundColor: blueColor,
       body: ListView(
@@ -115,7 +119,7 @@ class _RegisterAddressState extends State<RegisterAddress> {
           Align(
             alignment: Alignment.centerRight,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: onContinue,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
