@@ -9,7 +9,6 @@ import 'package:jersipedia/screens/register_address.dart';
 import 'package:jersipedia/screens/register_screen.dart';
 import 'package:jersipedia/screens/update_password_screen.dart';
 import 'package:jersipedia/screens/update_profile_screen.dart';
-import 'package:jersipedia/screens/webview_screen.dart';
 import 'package:jersipedia/utils/theme.dart';
 
 void main() {
@@ -48,10 +47,6 @@ class MyApp extends StatelessWidget {
         '/history-checkout': (context) => const HistoryCheckoutScreen(),
         '/change-profile': (context) => const UpdateProfileScreen(),
         '/change-password': (context) => const UpdatePasswordScreen(),
-        '/webview': (context) => const WebviewScreen(
-              title: 'Lanjutkan Pembayaran',
-              uri: 'https://google.com',
-            ),
       },
     );
   }

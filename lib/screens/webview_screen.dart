@@ -61,7 +61,9 @@ class WebviewScreen extends StatelessWidget {
                 icon: const Icon(Icons.chevron_left),
                 color: blueColor,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ),
           ],

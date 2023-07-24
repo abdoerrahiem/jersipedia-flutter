@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jersipedia/screens/webview_screen.dart';
 import 'package:jersipedia/utils/theme.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -6,6 +7,22 @@ class CheckoutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onPay() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const WebviewScreen(
+            title: 'Lanjutkan Pembayaran',
+            uri: 'https://google.com',
+          ),
+        ),
+      );
+    }
+
+    void onChangeAddress() {
+      Navigator.pushNamed(context, '/change-profile');
+    }
+
     return Scaffold(
       backgroundColor: blueColor,
       appBar: AppBar(
@@ -32,7 +49,9 @@ class CheckoutScreen extends StatelessWidget {
                 icon: const Icon(Icons.chevron_left),
                 color: blueColor,
                 iconSize: 30,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
             ),
           ],
@@ -71,7 +90,7 @@ class CheckoutScreen extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: onChangeAddress,
                         style: TextButton.styleFrom(
                           foregroundColor: whiteColor,
                           backgroundColor: Colors.transparent,
@@ -248,7 +267,7 @@ class CheckoutScreen extends StatelessWidget {
                       ],
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: onPay,
                       icon: Icon(
                         Icons.shopping_cart,
                         color: whiteColor,
