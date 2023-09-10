@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/user/user_bloc.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/button_icon.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -16,6 +18,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int activeSliderIndex = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserBloc>().add(GetCurrentUser());
+  }
 
   @override
   Widget build(BuildContext context) {

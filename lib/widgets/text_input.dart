@@ -49,7 +49,7 @@ class TextInput extends StatelessWidget {
                   .merge(titleStyle),
             ),
           ),
-        TextField(
+        TextFormField(
           controller: controller,
           keyboardType: keyboardType ?? TextInputType.none,
           maxLines: isMultipleLine ? null : 1,
@@ -59,7 +59,7 @@ class TextInput extends StatelessWidget {
             fontSize: 14,
           ),
           decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
+            border: OutlineInputBorder(
               borderSide: BorderSide(
                 width: borderWidth ?? 0,
                 color: borderColor ?? whiteColor,

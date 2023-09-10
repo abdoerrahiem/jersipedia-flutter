@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/profile_button.dart';
 
@@ -121,8 +122,13 @@ Widget profileButtons(BuildContext context) {
       ProfileButton(
         icon: Icons.logout,
         title: 'Keluar',
-        onPress: () {
-          Navigator.pushNamed(context, '/');
+        onPress: () async {
+          const storage = FlutterSecureStorage();
+          await storage.deleteAll();
+          if (context.mounted) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/login', (route) => false);
+          }
         },
       ),
     ],
