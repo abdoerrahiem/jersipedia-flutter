@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jersipedia/models/register_model.dart';
+import 'package:jersipedia/screens/register_address.dart';
+import 'package:jersipedia/utils/function.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/text_input.dart';
 
@@ -22,7 +25,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
         TextEditingController(text: '');
 
     void onContinue() {
-      Navigator.pushNamed(context, '/register-address');
+      if (nameController.text.trim().isEmpty ||
+          emailController.text.trim().isEmpty ||
+          phoneController.text.trim().isEmpty ||
+          passwordController.text.trim().isEmpty) {
+        return showSnackbar(
+            context: context, message: 'All fields are required.');
+      }
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RegisterAddress(
+            data: RegisterModel(
+                name: nameController.text,
+                email: emailController.text,
+                phone: phoneController.text,
+                password: passwordController.text),
+          ),
+        ),
+      );
     }
 
     return Scaffold(

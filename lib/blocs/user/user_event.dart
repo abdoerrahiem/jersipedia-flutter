@@ -40,3 +40,11 @@ class UpdatePassword extends UserEvent {
   @override
   List<Object> get props => [data];
 }
+
+class RegisterUser extends UserEvent {
+  final RegisterModel data;
+  const RegisterUser(this.data);
+
+  @override
+  List<Object> get props => [data];
+}

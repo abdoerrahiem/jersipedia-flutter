@@ -27,7 +27,7 @@ void showSnackbar(
     {required BuildContext context, required message, SnackbarType? type}) {
   Flushbar(
     message: message,
-    flushbarPosition: FlushbarPosition.BOTTOM,
+    flushbarPosition: FlushbarPosition.TOP,
     backgroundColor: type == SnackbarType.success ? greenColor : redColor,
     duration: const Duration(seconds: 3),
   ).show(context);

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:jersipedia/models/login_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:jersipedia/models/register_model.dart';
 import 'package:jersipedia/models/update_password_model.dart';
 import 'package:jersipedia/models/update_photo_profile_model.dart';
 import 'package:jersipedia/models/update_profile_model.dart';
@@ -133,6 +134,26 @@ class UserService {
         }
       } else {
         throw '';
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> register(RegisterModel data) async {
+    try {
+      final res = await http.post(
+        Uri.parse('$baseUrl/user/register'),
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: json.encode(data.toJson()),
+      );
+
+      if (res.statusCode == 200) {
+        return 'Your account has been registered.';
+      } else {
+        throw jsonDecode(res.body)['message'];
       }
     } catch (e) {
       rethrow;

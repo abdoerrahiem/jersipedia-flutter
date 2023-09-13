@@ -368,9 +368,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
                               setState(() {
                                 cityName = foundCity[0].cityName.toString();
-                              });
-
-                              setState(() {
                                 cityController.text = value.toString();
                               });
                             }),

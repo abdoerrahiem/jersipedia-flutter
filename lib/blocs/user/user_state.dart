@@ -98,3 +98,21 @@ class UpdatePasswordSuccess extends UserState {
   @override
   List<Object> get props => [message];
 }
+
+class RegisterUserLoading extends UserState {}
+
+class RegisterUserFailed extends UserState {
+  final String e;
+  const RegisterUserFailed(this.e);
+
+  @override
+  List<Object> get props => [e];
+}
+
+class RegisterUserSuccess extends UserState {
+  final String message;
+  const RegisterUserSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
