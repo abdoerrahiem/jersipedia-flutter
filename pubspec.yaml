@@ -46,6 +46,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   equatable: ^2.0.5
   another_flushbar: ^1.12.30
+  image_picker: ^1.0.4
 
 flutter_launcher_icons:
   image_path: 'assets/icons/icon.png'

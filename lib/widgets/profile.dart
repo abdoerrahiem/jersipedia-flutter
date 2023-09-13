@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jersipedia/blocs/user/user_bloc.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/profile_button.dart';
 
@@ -22,76 +24,87 @@ class Profile extends StatelessWidget {
 }
 
 Widget profileHeader() {
-  return Container(
-    width: double.infinity,
-    padding: const EdgeInsets.symmetric(
-      vertical: 15,
-      horizontal: 15,
-    ),
-    decoration: BoxDecoration(
-      color: blueColor,
-      borderRadius: const BorderRadius.only(
-        bottomLeft: Radius.circular(20),
-        bottomRight: Radius.circular(20),
+  return Builder(builder: (context) {
+    final userState = context.watch<UserBloc>().state;
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        vertical: 15,
+        horizontal: 15,
       ),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Center(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: Image.network(
-              'https://plus.unsplash.com/premium_photo-1669748157807-30514e416843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60',
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
+      decoration: BoxDecoration(
+        color: blueColor,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (userState is CurrentUserSuccess)
+            Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(999),
+                child: Image.network(
+                  userState.user.photo.toString(),
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          const SizedBox(height: 10),
+          Center(
+            child: Text(
+              userState is CurrentUserSuccess
+                  ? userState.user.name.toString()
+                  : '',
+              style: whiteTextStyle.copyWith(
+                fontSize: 20,
+                fontWeight: fontWeightBold,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 10),
-        Center(
-          child: Text(
-            'Abdur Rahim',
-            style: whiteTextStyle.copyWith(
-              fontSize: 20,
-              fontWeight: fontWeightBold,
-            ),
+          const SizedBox(height: 20),
+          Row(
+            children: [
+              Icon(
+                Icons.phone,
+                color: whiteColor,
+                size: 24,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                userState is CurrentUserSuccess
+                    ? userState.user.phone.toString()
+                    : '',
+                style: whiteTextStyle.copyWith(),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 20),
-        Row(
-          children: [
-            Icon(
-              Icons.phone,
-              color: whiteColor,
-              size: 24,
-            ),
-            const SizedBox(width: 10),
-            Text(
-              '+6289694624299',
-              style: whiteTextStyle.copyWith(),
-            ),
-          ],
-        ),
-        const SizedBox(height: 15),
-        Row(
-          children: [
-            Icon(
-              Icons.location_on,
-              color: whiteColor,
-              size: 24,
-            ),
-            const SizedBox(width: 10),
-            Text(
-              'Mempawah, Indonesia',
-              style: whiteTextStyle.copyWith(),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
+          const SizedBox(height: 15),
+          Row(
+            children: [
+              Icon(
+                Icons.location_on,
+                color: whiteColor,
+                size: 24,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                userState is CurrentUserSuccess
+                    ? userState.user.address.toString()
+                    : '',
+                style: whiteTextStyle.copyWith(),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  });
 }
 
 Widget profileButtons(BuildContext context) {

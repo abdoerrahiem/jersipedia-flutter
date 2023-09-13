@@ -44,3 +44,39 @@ class CurrentUserSuccess extends UserState {
   @override
   List<Object> get props => [user];
 }
+
+class UpdateProfileLoading extends UserState {}
+
+class UpdateProfileFailed extends UserState {
+  final String e;
+  const UpdateProfileFailed(this.e);
+
+  @override
+  List<Object> get props => [e];
+}
+
+class UpdateProfileSuccess extends UserState {
+  final String message;
+  const UpdateProfileSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class UpdatePhotoProfileLoading extends UserState {}
+
+class UpdatePhotoProfileFailed extends UserState {
+  final String e;
+  const UpdatePhotoProfileFailed(this.e);
+
+  @override
+  List<Object> get props => [e];
+}
+
+class UpdatePhotoProfileSuccess extends UserState {
+  final String message;
+  const UpdatePhotoProfileSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

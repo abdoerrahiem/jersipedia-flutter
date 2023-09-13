@@ -8,8 +8,8 @@ class UserModel {
   final String? city;
   final bool? isAdmin;
   final String? photo;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
 
   UserModel(
       {this.id,
@@ -48,8 +48,8 @@ class UserModel {
     String? city,
     bool? isAdmin,
     String? photo,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    String? createdAt,
+    String? updatedAt,
   }) =>
       UserModel(
         id: id ?? this.id,

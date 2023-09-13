@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/city/city_bloc.dart';
+import 'package:jersipedia/blocs/province/province_bloc.dart';
 import 'package:jersipedia/blocs/user/user_bloc.dart';
 import 'package:jersipedia/screens/cart_screen.dart';
 import 'package:jersipedia/screens/checkout_screen.dart';
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => UserBloc()),
+        BlocProvider(create: (context) => ProvinceBloc()),
+        BlocProvider(create: (context) => CityBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

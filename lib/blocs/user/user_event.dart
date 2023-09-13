@@ -16,3 +16,19 @@ class UserLogin extends UserEvent {
 }
 
 class GetCurrentUser extends UserEvent {}
+
+class UpdateProfile extends UserEvent {
+  final UpdateProfileModel data;
+  const UpdateProfile(this.data);
+
+  @override
+  List<Object> get props => [data];
+}
+
+class UpdatePhotoProfile extends UserEvent {
+  final UpdatePhotoProfileModel data;
+  const UpdatePhotoProfile(this.data);
+
+  @override
+  List<Object> get props => [data];
+}

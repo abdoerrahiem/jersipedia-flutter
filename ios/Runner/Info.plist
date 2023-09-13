@@ -49,5 +49,11 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>This app needs to access your photo library to upload photos or videos.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>This app needs to access your camera to upload photos or videos.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>This app needs to access your microphone to record photos or videos.</string>
 	</dict>
 </plist>
