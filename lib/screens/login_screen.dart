@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 130,
                       ),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 40),
                     TextInput(
                       controller: emailController,
                       placeholder: 'Input your email',
