@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:jersipedia/models/login_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:jersipedia/models/update_password_model.dart';
 import 'package:jersipedia/models/update_photo_profile_model.dart';
 import 'package:jersipedia/models/update_profile_model.dart';
 import 'package:jersipedia/models/user_model.dart';
@@ -75,6 +76,34 @@ class UserService {
           return 'Your photo updated.';
         } else {
           throw res.reasonPhrase!;
+        }
+      } else {
+        throw 'Please relogin.';
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<String> updatePassword(UpdatePasswordModel data) async {
+    try {
+      const storage = FlutterSecureStorage();
+      String? token = await storage.read(key: 'token');
+
+      if (token != null) {
+        final res = await http.put(
+          Uri.parse('$baseUrl/user/me/password'),
+          headers: {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer $token',
+          },
+          body: json.encode(data.toJson()),
+        );
+
+        if (res.statusCode == 200) {
+          return jsonDecode(res.body)['message'];
+        } else {
+          throw jsonDecode(res.body)['message'];
         }
       } else {
         throw 'Please relogin.';

@@ -20,12 +20,6 @@ class _HomeState extends State<Home> {
   int activeSliderIndex = 1;
 
   @override
-  void initState() {
-    super.initState();
-    context.read<UserBloc>().add(GetCurrentUser());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(

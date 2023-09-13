@@ -32,3 +32,11 @@ class UpdatePhotoProfile extends UserEvent {
   @override
   List<Object> get props => [data];
 }
+
+class UpdatePassword extends UserEvent {
+  final UpdatePasswordModel data;
+  const UpdatePassword(this.data);
+
+  @override
+  List<Object> get props => [data];
+}

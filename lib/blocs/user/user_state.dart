@@ -80,3 +80,21 @@ class UpdatePhotoProfileSuccess extends UserState {
   @override
   List<Object> get props => [message];
 }
+
+class UpdatePasswordLoading extends UserState {}
+
+class UpdatePasswordFailed extends UserState {
+  final String e;
+  const UpdatePasswordFailed(this.e);
+
+  @override
+  List<Object> get props => [e];
+}
+
+class UpdatePasswordSuccess extends UserState {
+  final String message;
+  const UpdatePasswordSuccess(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/user/user_bloc.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/home.dart';
 import 'package:jersipedia/widgets/profile.dart';
@@ -13,6 +15,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserBloc>().add(GetCurrentUser());
+  }
 
   void _onItemTapped(int index) {
     setState(() {

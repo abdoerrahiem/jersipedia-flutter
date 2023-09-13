@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:jersipedia/models/login_model.dart';
+import 'package:jersipedia/models/update_password_model.dart';
 import 'package:jersipedia/models/update_photo_profile_model.dart';
 import 'package:jersipedia/models/update_profile_model.dart';
 import 'package:jersipedia/models/user_model.dart';
@@ -50,6 +51,16 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           emit(UpdatePhotoProfileSuccess(message));
         } catch (e) {
           emit(UpdatePhotoProfileFailed(e.toString()));
+        }
+      }
+
+      if (event is UpdatePassword) {
+        try {
+          emit(UpdatePasswordLoading());
+          final String message = await UserService().updatePassword(event.data);
+          emit(UpdatePasswordSuccess(message));
+        } catch (e) {
+          emit(UpdatePasswordFailed(e.toString()));
         }
       }
     });
