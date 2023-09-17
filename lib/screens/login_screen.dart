@@ -38,6 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
         backgroundColor: blueColor,
+        resizeToAvoidBottomInset: false,
         body: BlocConsumer<UserBloc, UserState>(
           listener: (context, state) {
             if (state is UserFailed) {
@@ -149,7 +150,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Image.asset(
                     'assets/images/football_team.png',
                     width: 200,
-                    height: 200,
                   ),
                 ),
               ],

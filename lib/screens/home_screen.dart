@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/jersey/jersey_bloc.dart';
+import 'package:jersipedia/blocs/league/league_bloc.dart';
 import 'package:jersipedia/blocs/user/user_bloc.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/home.dart';
@@ -20,6 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     context.read<UserBloc>().add(GetCurrentUser());
+    context.read<LeagueBloc>().add(GetLeague());
+    context.read<JerseyHomeBloc>().add(GetHomeJersey());
+    context
+        .read<JerseyBloc>()
+        .add(const GetJersey(league: '', page: 1, size: 10, title: ''));
   }
 
   void _onItemTapped(int index) {

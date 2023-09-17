@@ -6,6 +6,7 @@ class LeagueCard extends StatelessWidget {
   final double? borderWidth;
   final Color? borderColor;
   final VoidCallback onPressed;
+  final String image;
 
   const LeagueCard({
     super.key,
@@ -13,6 +14,7 @@ class LeagueCard extends StatelessWidget {
     this.borderWidth,
     this.borderColor,
     required this.onPressed,
+    this.image = '',
   });
 
   @override
@@ -29,11 +31,17 @@ class LeagueCard extends StatelessWidget {
       ),
       child: IconButton(
         onPressed: onPressed,
-        icon: Image.asset(
-          'assets/images/laliga.png',
-          height: MediaQuery.of(context).size.width / 6,
-          width: MediaQuery.of(context).size.width / 6,
-        ),
+        icon: image.isNotEmpty
+            ? Image.network(
+                image,
+                height: MediaQuery.of(context).size.width / 6,
+                width: MediaQuery.of(context).size.width / 6,
+              )
+            : Image.asset(
+                'assets/images/laliga.png',
+                height: MediaQuery.of(context).size.width / 6,
+                width: MediaQuery.of(context).size.width / 6,
+              ),
       ),
     );
   }

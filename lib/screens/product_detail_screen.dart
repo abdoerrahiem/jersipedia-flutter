@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:jersipedia/models/jersey_model.dart';
+import 'package:jersipedia/utils/function.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:jersipedia/widgets/league_card.dart';
 import 'package:jersipedia/widgets/text_input.dart';
 
 class ProductDetailScreen extends StatefulWidget {
-  const ProductDetailScreen({super.key});
+  final JerseyModel product;
+  const ProductDetailScreen({
+    super.key,
+    required this.product,
+  });
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  final List<Map<String, dynamic>> items = [
-    {
-      'id': 1,
-      'image':
-          'https://plus.unsplash.com/premium_photo-1669748157807-30514e416843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-    },
-    {
-      'id': 2,
-      'image':
-          'https://plus.unsplash.com/premium_photo-1669741908308-5ca216f3fcd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGVyc29ufGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60',
-    }
-  ];
+  List<Map<String, dynamic>> items = [];
   Map<String, dynamic> item = {
     'id': 1,
     'image':
@@ -31,6 +26,47 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   };
   final TextEditingController descriptionController =
       TextEditingController(text: '');
+  num amount = 1;
+  String size = '';
+
+  @override
+  void initState() {
+    super.initState();
+    final currentProduct = widget.product;
+    setState(() {
+      size = currentProduct.size![0];
+      items = currentProduct.images!
+          .asMap()
+          .map((i, element) => MapEntry(i, {
+                'id': i + 1,
+                'image': element.toString(),
+              }))
+          .values
+          .toList();
+    });
+  }
+
+  onAdd() {
+    if (widget.product.stock! >= amount) {
+      setState(() {
+        amount = amount + 1;
+      });
+    }
+  }
+
+  onMinus() {
+    if (amount != 1) {
+      setState(() {
+        amount = amount - 1;
+      });
+    }
+  }
+
+  onChangeSize(String value) {
+    setState(() {
+      size = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +80,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 item = items[value];
               });
             }),
-            productDetail(descriptionController),
+            productDetail(
+              descriptionController,
+              widget.product,
+              amount,
+              size,
+              onAdd,
+              onMinus,
+              (value) => onChangeSize(value),
+            ),
           ],
         ),
       ),
@@ -129,7 +173,15 @@ Widget productHeader(BuildContext context, List<Map<String, dynamic>> items,
   );
 }
 
-Widget productDetail(TextEditingController descriptionController) {
+Widget productDetail(
+  TextEditingController descriptionController,
+  JerseyModel product,
+  num amount,
+  String size,
+  Function onAdd,
+  Function onMinus,
+  Function(String) onChangeSize,
+) {
   return Padding(
     padding: const EdgeInsets.all(20),
     child: Column(
@@ -138,31 +190,34 @@ Widget productDetail(TextEditingController descriptionController) {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Chelsea 3rd 2018-2019',
-                  style: blackTextStyle.copyWith(
-                    fontWeight: fontWeightBold,
-                    fontSize: 18,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.title.toString(),
+                    style: blackTextStyle.copyWith(
+                      fontWeight: fontWeightBold,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  '(Rp. 50.000)',
-                  style: blackTextStyle.copyWith(
-                    fontWeight: fontWeightSemiBold,
+                  const SizedBox(
+                    height: 5,
                   ),
-                ),
-              ],
+                  Text(
+                    '(${formatRupiah(product.price!)})',
+                    style: blackTextStyle.copyWith(
+                      fontWeight: fontWeightSemiBold,
+                    ),
+                  ),
+                ],
+              ),
             ),
             LeagueCard(
               backgroundColor: whiteColor,
               borderWidth: 1,
               borderColor: blueColor,
+              image: product.league!['image'],
               onPressed: () {},
             ),
           ],
@@ -175,11 +230,11 @@ Widget productDetail(TextEditingController descriptionController) {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Jenis: Replika Top Quality',
+              'Jenis: ${product.type}',
               style: blackTextStyle.copyWith(),
             ),
             Text(
-              'Berat: 0.25 kg',
+              'Berat: ${product.weight} kg',
               style: blackTextStyle.copyWith(),
             ),
           ],
@@ -212,13 +267,13 @@ Widget productDetail(TextEditingController descriptionController) {
                           Icons.remove,
                           color: blackColor,
                         ),
-                        onPressed: () {},
+                        onPressed: () => onMinus(),
                       ),
                       const SizedBox(
                         width: 15,
                       ),
                       Text(
-                        '1',
+                        amount.toString(),
                         style: blackTextStyle.copyWith(
                             fontWeight: fontWeightBlack, fontSize: 18),
                       ),
@@ -230,7 +285,7 @@ Widget productDetail(TextEditingController descriptionController) {
                           Icons.add,
                           color: blackColor,
                         ),
-                        onPressed: () {},
+                        onPressed: () => onAdd(),
                       ),
                     ],
                   ),
@@ -260,31 +315,21 @@ Widget productDetail(TextEditingController descriptionController) {
                       borderRadius: BorderRadius.circular(20),
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       icon: Icon(Icons.expand_more, color: blackColor),
-                      value: '1',
-                      items: [
-                        DropdownMenuItem(
-                          value: '1',
+                      value: size,
+                      items: product.size!.map((size) {
+                        return DropdownMenuItem(
+                          value: size,
                           child: Text(
-                            'M',
+                            size,
                             style: blackTextStyle.copyWith(),
                           ),
-                        ),
-                        DropdownMenuItem(
-                          value: '2',
-                          child: Text(
-                            'L',
-                            style: blackTextStyle.copyWith(),
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: '3',
-                          child: Text(
-                            'XL',
-                            style: blackTextStyle.copyWith(),
-                          ),
-                        ),
-                      ],
-                      onChanged: (value) {}),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        onChangeSize(
+                          value.toString(),
+                        );
+                      }),
                 ),
               ],
             ),
@@ -296,7 +341,7 @@ Widget productDetail(TextEditingController descriptionController) {
         TextInput(
           controller: descriptionController,
           placeholder: '',
-          title: 'Address',
+          title: 'Keterangan',
           titleStyle: blackTextStyle.copyWith(),
           isMultipleLine: true,
           minLine: 5,

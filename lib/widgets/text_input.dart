@@ -15,22 +15,25 @@ class TextInput extends StatelessWidget {
   final int minLine;
   final Color? borderColor;
   final Color? backgroundColor;
+  final Function(String)? onSubmit;
 
-  const TextInput(
-      {super.key,
-      required this.controller,
-      required this.placeholder,
-      this.lelftIcon,
-      this.borderRadius,
-      this.borderWidth,
-      this.title = '',
-      this.titleStyle,
-      this.isPassword = false,
-      this.keyboardType,
-      this.isMultipleLine = false,
-      this.minLine = 1,
-      this.borderColor,
-      this.backgroundColor});
+  const TextInput({
+    super.key,
+    required this.controller,
+    required this.placeholder,
+    this.lelftIcon,
+    this.borderRadius,
+    this.borderWidth,
+    this.title = '',
+    this.titleStyle,
+    this.isPassword = false,
+    this.keyboardType,
+    this.isMultipleLine = false,
+    this.minLine = 1,
+    this.borderColor,
+    this.backgroundColor,
+    this.onSubmit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +54,11 @@ class TextInput extends StatelessWidget {
           ),
         TextFormField(
           controller: controller,
-          keyboardType: keyboardType ?? TextInputType.none,
+          keyboardType: keyboardType ?? TextInputType.text,
           maxLines: isMultipleLine ? null : 1,
           minLines: minLine,
           obscureText: isPassword,
+          onFieldSubmitted: onSubmit,
           style: blackTextStyle.copyWith(
             fontSize: 14,
           ),

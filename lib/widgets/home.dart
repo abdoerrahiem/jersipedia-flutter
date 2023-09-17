@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/jersey/jersey_bloc.dart';
+import 'package:jersipedia/blocs/league/league_bloc.dart';
 import 'package:jersipedia/blocs/user/user_bloc.dart';
+import 'package:jersipedia/screens/product_detail_screen.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/button_icon.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:jersipedia/widgets/league_card.dart';
+import 'package:jersipedia/widgets/loader.dart';
 import 'package:jersipedia/widgets/product_card.dart';
 
 class Home extends StatefulWidget {
@@ -32,6 +36,7 @@ class _HomeState extends State<Home> {
           }, context),
           homeLeague(context, widget.setIndex),
           homeProducts(context),
+          const SizedBox(height: 100),
         ],
       ),
     );
@@ -138,119 +143,142 @@ Widget homeHeader(
 }
 
 Widget homeLeague(BuildContext context, Function(int) setIndex) {
-  return Container(
-    color: whiteColor,
-    padding: const EdgeInsets.only(bottom: 20),
-    child: Container(
+  final leagueState = context.watch<LeagueBloc>().state;
+
+  return Builder(builder: (context) {
+    return Container(
+      color: whiteColor,
       padding: const EdgeInsets.only(bottom: 20),
-      decoration: BoxDecoration(
-          color: blueColor,
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-          )),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              children: [
-                Text(
-                  'Pilih ',
-                  style: blackTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: fontWeightBold,
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+            color: blueColor,
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            )),
+        child: leagueState is LeagueSuccess
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Pilih ',
+                          style: blackTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: fontWeightBold,
+                          ),
+                        ),
+                        Text(
+                          'Liga',
+                          style: whiteTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: fontWeightBold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Text(
-                  'Liga',
-                  style: whiteTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: fontWeightBold,
+                  const SizedBox(height: 10),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: leagueState.data
+                          .map(
+                            (item) => LeagueCard(
+                                image: item.image.toString(),
+                                onPressed: () {
+                                  setIndex(1);
+                                }),
+                          )
+                          .toList(),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              children: [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-              ]
-                  .map(
-                    (item) => LeagueCard(onPressed: () {
-                      setIndex(1);
-                    }),
-                  )
-                  .toList(),
-            ),
-          ),
-        ],
+                ],
+              )
+            : Container(),
       ),
-    ),
-  );
+    );
+  });
 }
 
 Widget homeProducts(BuildContext context) {
-  return Container(
-    color: whiteColor,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            children: [
-              Text(
-                'Pilih ',
-                style: blackTextStyle.copyWith(
-                  fontSize: 14,
-                  fontWeight: fontWeightBold,
+  return Builder(builder: (context) {
+    final jerseyHomeState = context.watch<JerseyHomeBloc>().state;
+
+    return Container(
+      color: whiteColor,
+      child: jerseyHomeState is HomeJerseySuccess
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Pilih ',
+                        style: blackTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: fontWeightBold,
+                        ),
+                      ),
+                      Text(
+                        'Jersey ',
+                        style: blueTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: fontWeightBold,
+                        ),
+                      ),
+                      Text(
+                        'yang kamu inginkan',
+                        style: blackTextStyle.copyWith(
+                          fontSize: 14,
+                          fontWeight: fontWeightBold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                'Jersey ',
-                style: blueTextStyle.copyWith(
-                  fontSize: 14,
-                  fontWeight: fontWeightBold,
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                    bottom: 30,
+                  ),
+                  child: Wrap(
+                    spacing: 15,
+                    runSpacing: 15,
+                    children: jerseyHomeState.data
+                        .map(
+                          (item) => ProductCard(
+                            title: item.title.toString(),
+                            image: item.images![0].toString(),
+                            price: item.price,
+                            onPress: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailScreen(
+                                    product: item,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ),
-              ),
-              Text(
-                'yang kamu inginkan',
-                style: blackTextStyle.copyWith(
-                  fontSize: 14,
-                  fontWeight: fontWeightBold,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 15,
-            right: 15,
-            bottom: 30,
-          ),
-          child: Wrap(
-            spacing: 15,
-            runSpacing: 15,
-            children: [1, 2, 3, 4, 5].map((e) => const ProductCard()).toList(),
-          ),
-        ),
-      ],
-    ),
-  );
+              ],
+            )
+          : const Loader(),
+    );
+  });
 }

@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jersipedia/blocs/city/city_bloc.dart';
+import 'package:jersipedia/blocs/jersey/jersey_bloc.dart';
+import 'package:jersipedia/blocs/league/league_bloc.dart';
 import 'package:jersipedia/blocs/province/province_bloc.dart';
 import 'package:jersipedia/blocs/user/user_bloc.dart';
 import 'package:jersipedia/screens/cart_screen.dart';
@@ -9,7 +11,6 @@ import 'package:jersipedia/screens/checkout_screen.dart';
 import 'package:jersipedia/screens/history_checkout_screen.dart';
 import 'package:jersipedia/screens/home_screen.dart';
 import 'package:jersipedia/screens/login_screen.dart';
-import 'package:jersipedia/screens/product_detail_screen.dart';
 import 'package:jersipedia/screens/register_screen.dart';
 import 'package:jersipedia/screens/splash_screen.dart';
 import 'package:jersipedia/screens/update_password_screen.dart';
@@ -32,6 +33,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UserBloc()),
         BlocProvider(create: (context) => ProvinceBloc()),
         BlocProvider(create: (context) => CityBloc()),
+        BlocProvider(create: (context) => LeagueBloc()),
+        BlocProvider(create: (context) => JerseyBloc()),
+        BlocProvider(create: (context) => JerseyHomeBloc()),
+        BlocProvider(create: (context) => JerseySearchBloc()),
+        BlocProvider(create: (context) => JerseySearchByLeagueBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -54,7 +60,6 @@ class MyApp extends StatelessWidget {
           '/login': (context) => const LoginScreen(),
           '/register': (context) => const RegisterScreen(),
           '/home': (context) => const HomeScreen(),
-          '/product': (context) => const ProductDetailScreen(),
           '/cart': (context) => const CartScreen(),
           '/checkout': (context) => const CheckoutScreen(),
           '/history-checkout': (context) => const HistoryCheckoutScreen(),
