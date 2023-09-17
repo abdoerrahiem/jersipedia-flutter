@@ -194,6 +194,23 @@ Widget homeLeague(BuildContext context, Function(int) setIndex) {
                                 image: item.image.toString(),
                                 onPressed: () {
                                   setIndex(1);
+                                  context.read<JerseyBloc>().add(
+                                        GetJersey(
+                                          league: item.id.toString(),
+                                          page: 1,
+                                          size: 10,
+                                          title: '',
+                                        ),
+                                      );
+                                  context.read<JerseySearchByLeagueBloc>().add(
+                                        ChangeJerseySearchByLeague(
+                                          item.id.toString(),
+                                          item.title.toString(),
+                                        ),
+                                      );
+                                  context.read<JerseySearchBloc>().add(
+                                        const ChangeJerseySearchText(''),
+                                      );
                                 }),
                           )
                           .toList(),
