@@ -43,7 +43,7 @@ class ButtonIcon extends StatelessWidget {
             highlightColor: hightlightColor ?? greyColor,
             onPressed: handlePress,
           ),
-          if (chipNumber != null)
+          if (chipNumber != null && chipNumber! > 0)
             Positioned(
               top: 5,
               right: 5,

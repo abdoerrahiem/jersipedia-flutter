@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/cart/cart_bloc.dart';
 import 'package:jersipedia/blocs/jersey/jersey_bloc.dart';
 import 'package:jersipedia/blocs/league/league_bloc.dart';
 import 'package:jersipedia/blocs/user/user_bloc.dart';
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     context
         .read<JerseyBloc>()
         .add(const GetJersey(league: '', page: 1, size: 10, title: ''));
+    context.read<CartBloc>().add(GetMyCart());
   }
 
   void _onItemTapped(int index) {

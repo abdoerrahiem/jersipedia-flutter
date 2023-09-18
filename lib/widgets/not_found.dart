@@ -10,9 +10,10 @@ class NotFound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
+    return Center(
       heightFactor: 1.5,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
             'assets/images/box.png',

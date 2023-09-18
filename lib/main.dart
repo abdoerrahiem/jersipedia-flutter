@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/cart/cart_bloc.dart';
 import 'package:jersipedia/blocs/city/city_bloc.dart';
 import 'package:jersipedia/blocs/jersey/jersey_bloc.dart';
 import 'package:jersipedia/blocs/league/league_bloc.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => JerseyHomeBloc()),
         BlocProvider(create: (context) => JerseySearchBloc()),
         BlocProvider(create: (context) => JerseySearchByLeagueBloc()),
+        BlocProvider(create: (context) => CartBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

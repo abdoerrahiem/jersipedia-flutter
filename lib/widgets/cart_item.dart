@@ -36,6 +36,7 @@ class CartItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -47,64 +48,66 @@ class CartItem extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    name,
-                    style: whiteTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: fontWeightSemiBold,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: whiteTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: fontWeightSemiBold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    formatRupiah(price),
-                    style: whiteTextStyle.copyWith(),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Text(
-                        'Jumlah: ',
-                        style: whiteTextStyle.copyWith(),
-                      ),
-                      Text(
-                        '$qty',
-                        style: whiteTextStyle.copyWith(
-                          fontWeight: fontWeightSemiBold,
+                    Text(
+                      formatRupiah(price),
+                      style: whiteTextStyle.copyWith(),
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text(
+                          'Jumlah: ',
+                          style: whiteTextStyle.copyWith(),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Ukuran: ',
-                        style: whiteTextStyle.copyWith(),
-                      ),
-                      Text(
-                        size,
-                        style: whiteTextStyle.copyWith(
-                          fontWeight: fontWeightSemiBold,
+                        Text(
+                          '$qty',
+                          style: whiteTextStyle.copyWith(
+                            fontWeight: fontWeightSemiBold,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Total Harga: ',
-                        style: whiteTextStyle.copyWith(),
-                      ),
-                      Text(
-                        formatRupiah(qty * price),
-                        style: whiteTextStyle.copyWith(
-                          fontWeight: fontWeightSemiBold,
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Ukuran: ',
+                          style: whiteTextStyle.copyWith(),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          size,
+                          style: whiteTextStyle.copyWith(
+                            fontWeight: fontWeightSemiBold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Total Harga: ',
+                          style: whiteTextStyle.copyWith(),
+                        ),
+                        Text(
+                          formatRupiah(qty * price),
+                          style: whiteTextStyle.copyWith(
+                            fontWeight: fontWeightSemiBold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -121,7 +124,7 @@ class CartItem extends StatelessWidget {
             ),
             child: IconButton(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-              onPressed: () {},
+              onPressed: onDelete,
               icon: const Icon(Icons.close),
               color: whiteColor,
               iconSize: 20,

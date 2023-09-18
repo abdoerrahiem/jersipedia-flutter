@@ -1,4 +1,4 @@
-package com.abdoerrahiem.jersipedia.jersipedia
+package com.abdoerrahiem.jersipedia
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -47,6 +47,7 @@ dependencies:
   equatable: ^2.0.5
   another_flushbar: ^1.12.30
   image_picker: ^1.0.4
+  change_app_package_name: ^1.1.0
 
 flutter_launcher_icons:
   image_path: 'assets/icons/icon.png'
@@ -95,6 +96,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - shorebird.yaml
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/cart/cart_bloc.dart';
+import 'package:jersipedia/models/add_cart_model.dart';
 import 'package:jersipedia/models/jersey_model.dart';
 import 'package:jersipedia/utils/function.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:jersipedia/widgets/league_card.dart';
+import 'package:jersipedia/widgets/loader.dart';
 import 'package:jersipedia/widgets/text_input.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -19,11 +23,7 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   List<Map<String, dynamic>> items = [];
-  Map<String, dynamic> item = {
-    'id': 1,
-    'image':
-        'https://plus.unsplash.com/premium_photo-1669748157807-30514e416843?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-  };
+  Map<String, dynamic> item = {};
   final TextEditingController descriptionController =
       TextEditingController(text: '');
   num amount = 1;
@@ -43,6 +43,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               }))
           .values
           .toList();
+      item = {'id': 1, 'image': currentProduct.images![0]};
     });
   }
 
@@ -68,6 +69,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     });
   }
 
+  onAddToCart() {
+    context.read<CartBloc>().add(
+          AddCart(
+            AddCartModel(
+              jerseyId: widget.product.id,
+              amount: amount,
+              size: size,
+              description: descriptionController.text,
+            ),
+          ),
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,6 +102,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               onAdd,
               onMinus,
               (value) => onChangeSize(value),
+              onAddToCart,
             ),
           ],
         ),
@@ -181,189 +196,226 @@ Widget productDetail(
   Function onAdd,
   Function onMinus,
   Function(String) onChangeSize,
+  VoidCallback onAddToCart,
 ) {
-  return Padding(
-    padding: const EdgeInsets.all(20),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  return BlocListener<CartBloc, CartState>(
+    listener: (context, state) {
+      if (state is AddCartFailed) {
+        showSnackbar(context: context, message: state.e);
+      }
+
+      if (state is AddCartSuccess) {
+        Navigator.popAndPushNamed(context, '/cart');
+        showSnackbar(
+          context: context,
+          message: state.message,
+          type: SnackbarType.success,
+        );
+      }
+    },
+    child: Builder(builder: (context) {
+      final cartState = context.watch<CartBloc>().state;
+
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    product.title.toString(),
-                    style: blackTextStyle.copyWith(
-                      fontWeight: fontWeightBold,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '(${formatRupiah(product.price!)})',
-                    style: blackTextStyle.copyWith(
-                      fontWeight: fontWeightSemiBold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            LeagueCard(
-              backgroundColor: whiteColor,
-              borderWidth: 1,
-              borderColor: blueColor,
-              image: product.league!['image'],
-              onPressed: () {},
-            ),
-          ],
-        ),
-        Divider(
-          color: greyColor,
-          height: 50,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Jenis: ${product.type}',
-              style: blackTextStyle.copyWith(),
-            ),
-            Text(
-              'Berat: ${product.weight} kg',
-              style: blackTextStyle.copyWith(),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Jumlah',
-                  style: blackTextStyle.copyWith(),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: greyColor,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.remove,
-                          color: blackColor,
+                      Text(
+                        product.title.toString(),
+                        style: blackTextStyle.copyWith(
+                          fontWeight: fontWeightBold,
+                          fontSize: 18,
                         ),
-                        onPressed: () => onMinus(),
                       ),
                       const SizedBox(
-                        width: 15,
+                        height: 5,
                       ),
                       Text(
-                        amount.toString(),
+                        '(${formatRupiah(product.price!)})',
                         style: blackTextStyle.copyWith(
-                            fontWeight: fontWeightBlack, fontSize: 18),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.add,
-                          color: blackColor,
+                          fontWeight: fontWeightSemiBold,
                         ),
-                        onPressed: () => onAdd(),
                       ),
                     ],
                   ),
                 ),
+                LeagueCard(
+                  backgroundColor: whiteColor,
+                  borderWidth: 1,
+                  borderColor: blueColor,
+                  image: product.league!['image'],
+                  onPressed: () {},
+                ),
               ],
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Divider(
+              color: greyColor,
+              height: 50,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Ukuran',
+                  'Jenis: ${product.type}',
                   style: blackTextStyle.copyWith(),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: greyColor,
-                  ),
-                  width: 150,
-                  child: DropdownButtonFormField(
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      icon: Icon(Icons.expand_more, color: blackColor),
-                      value: size,
-                      items: product.size!.map((size) {
-                        return DropdownMenuItem(
-                          value: size,
-                          child: Text(
-                            size,
-                            style: blackTextStyle.copyWith(),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (value) {
-                        onChangeSize(
-                          value.toString(),
-                        );
-                      }),
+                Text(
+                  'Berat: ${product.weight} kg',
+                  style: blackTextStyle.copyWith(),
                 ),
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Jumlah',
+                      style: blackTextStyle.copyWith(),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: greyColor,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.remove,
+                              color: blackColor,
+                            ),
+                            onPressed: () => onMinus(),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Text(
+                            amount.toString(),
+                            style: blackTextStyle.copyWith(
+                                fontWeight: fontWeightBlack, fontSize: 18),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.add,
+                              color: blackColor,
+                            ),
+                            onPressed: () => onAdd(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Ukuran',
+                      style: blackTextStyle.copyWith(),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: greyColor,
+                      ),
+                      width: 150,
+                      child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                          icon: Icon(Icons.expand_more, color: blackColor),
+                          value: size,
+                          items: product.size!.map((size) {
+                            return DropdownMenuItem(
+                              value: size,
+                              child: Text(
+                                size,
+                                style: blackTextStyle.copyWith(),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            onChangeSize(
+                              value.toString(),
+                            );
+                          }),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextInput(
+              controller: descriptionController,
+              placeholder: '',
+              title: 'Keterangan',
+              titleStyle: blackTextStyle.copyWith(),
+              isMultipleLine: true,
+              minLine: 5,
+              borderRadius: 20,
+              backgroundColor: greyColor,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton.icon(
+                onPressed: onAddToCart,
+                icon: Icon(Icons.shopping_cart, color: whiteColor),
+                label: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Masukkan Keranjang',
+                      style: whiteTextStyle.copyWith(),
+                    ),
+                    if (cartState is AddCartLoading)
+                      Loader(
+                        height: 15,
+                        width: 15,
+                        color: whiteColor,
+                      )
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: blueColor,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
+              ),
+            )
           ],
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        TextInput(
-          controller: descriptionController,
-          placeholder: '',
-          title: 'Keterangan',
-          titleStyle: blackTextStyle.copyWith(),
-          isMultipleLine: true,
-          minLine: 5,
-          borderRadius: 20,
-          backgroundColor: greyColor,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: ElevatedButton.icon(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart, color: whiteColor),
-            label: Text('Masukkan Keranjang', style: whiteTextStyle.copyWith()),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: blueColor,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            ),
-          ),
-        )
-      ],
-    ),
+      );
+    }),
   );
 }

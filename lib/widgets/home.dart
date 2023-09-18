@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/cart/cart_bloc.dart';
 import 'package:jersipedia/blocs/jersey/jersey_bloc.dart';
 import 'package:jersipedia/blocs/league/league_bloc.dart';
 import 'package:jersipedia/blocs/user/user_bloc.dart';
@@ -22,6 +23,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int activeSliderIndex = 1;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +61,7 @@ Widget homeHeader(
 
   return Builder(builder: (context) {
     final userState = context.watch<UserBloc>().state;
+    final cartState = context.watch<CartBloc>().state;
 
     return Container(
       color: blueColor,
@@ -89,7 +96,8 @@ Widget homeHeader(
                 ),
                 ButtonIcon(
                   iconName: 'assets/icons/cart.png',
-                  chipNumber: 100,
+                  chipNumber:
+                      cartState is GetMyCartSuccess ? cartState.data.length : 0,
                   handlePress: onCart,
                 ),
               ],
