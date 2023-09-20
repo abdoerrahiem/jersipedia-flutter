@@ -122,19 +122,21 @@ class _CartScreenState extends State<CartScreen> {
                     ? Stack(
                         children: [
                           ListView(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 15,
-                              ),
-                              children: data.map((item) {
-                                return CartItem(
-                                  name: item.jersey!['title'],
-                                  price: item.jersey!['price'],
-                                  size: item.size.toString(),
-                                  qty: item.amount!,
-                                  imageUrl: item.jersey!['images'][0],
-                                  onDelete: () => onDelete(item.id.toString()),
-                                );
-                              }).toList()),
+                            padding: const EdgeInsets.only(
+                              top: 10,
+                              bottom: 100,
+                            ),
+                            children: data.map((item) {
+                              return CartItem(
+                                name: item.jersey!['title'],
+                                price: item.jersey!['price'],
+                                size: item.size.toString(),
+                                qty: item.amount!,
+                                imageUrl: item.jersey!['images'][0],
+                                onDelete: () => onDelete(item.id.toString()),
+                              );
+                            }).toList(),
+                          ),
                           Positioned(
                             bottom: 0,
                             width: MediaQuery.of(context).size.width,

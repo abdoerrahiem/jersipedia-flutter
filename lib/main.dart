@@ -46,6 +46,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scaffoldBackgroundColor: whiteColor,
           useMaterial3: true,
+          pageTransitionsTheme: const PageTransitionsTheme(builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          }),
           appBarTheme: AppBarTheme(
             backgroundColor: whiteColor,
             elevation: 0,
