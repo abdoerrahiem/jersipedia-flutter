@@ -381,6 +381,8 @@ Widget productDetail(
               minLine: 5,
               borderRadius: 20,
               backgroundColor: greyColor,
+              textInputAction: TextInputAction.newline,
+              keyboardType: TextInputType.multiline,
             ),
             const SizedBox(
               height: 30,

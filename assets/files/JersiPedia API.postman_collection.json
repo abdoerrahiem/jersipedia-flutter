@@ -1,0 +1,684 @@
+{
+	"info": {
+		"_postman_id": "cd1d734f-2109-4e39-997f-dcf92377498a",
+		"name": "JersiPedia API",
+		"description": "List of api for JersiPedia app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9048970"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Abdur Rahim\",\n    \"email\": \"abdoerrahiem@gmail.com\",\n    \"phone\": \"089694624299\",\n    \"password\": \"abdoerrahiem\",\n    \"address\": \"Jl. Bardan nadi\",\n    \"province\": \"Kalimantan Barat\",\n    \"city\": \"Mempawah\",\n    \"isAdmin\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/user/register",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"abdoerrahiem@gmail.com\",\n    \"password\": \"abdoerrahiem\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/user/login",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get current user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/user/me",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update current user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Abdur Rahim\",\n    \"email\": \"abdoerrahiem@gmail.com\",\n    \"phone\": \"089694624299\",\n    \"password\": \"abdoerrahiem\",\n    \"address\": \"Jl. Bardan nadi\",\n    \"province\": \"Kalimantan Barat\",\n    \"city\": \"Mempawah\",\n    \"isAdmin\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/user/me",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"user",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update photo user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/abdoerrahiem/Downloads/56368677_836555680011041_1338138305639743488_n.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local_url}}/user/me/photo",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"user",
+								"me",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update password user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldPassword\": \"abdoerrahiem2\",\n    \"newPassword\": \"abdoerrahiem2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/user/me/password",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"user",
+								"me",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Raja Ongkir",
+			"item": [
+				{
+					"name": "Get list province",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/raja-ongkir/province",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"raja-ongkir",
+								"province"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list city by province id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/raja-ongkir/city/12",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"raja-ongkir",
+								"city",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check ongkir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"weight\": 2000,\n    \"courier\": \"jne\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/raja-ongkir/check-ongkir",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"raja-ongkir",
+								"check-ongkir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "League",
+			"item": [
+				{
+					"name": "Add league",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Premier League",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/abdoerrahiem/Downloads/JersiPedia New Design/premierleague 1.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local_url}}/league",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"league"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get leagues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/league",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"league"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Jersey",
+			"item": [
+				{
+					"name": "Add jersey",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "league",
+									"value": "6504b6c8042f8a167213f740",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Manchester United 2017/2018/2019",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "250000",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Nike",
+									"type": "text"
+								},
+								{
+									"key": "weight",
+									"value": "0.25",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "M,L,XL,XXL",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/abdoerrahiem/Downloads/NicePng_man-back-png_1654589.png"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/abdoerrahiem/Downloads/NicePng_manchester-united-png_619991.png"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/abdoerrahiem/Downloads/NicePng_manchester-united-png_10117104.png"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local_url}}/jersey",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"jersey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get jersey",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/jersey?title=united&page=1&size=10&league=6504b6c8042f8a167213f740",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"jersey"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "united"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "league",
+									"value": "6504b6c8042f8a167213f740"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Add cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"jerseyId\": \"650566e77cc5983d3a95cfbf\",\n    \"amount\": 2,\n    \"size\": \"XL\",\n    \"description\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/cart",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/cart",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete cart",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/cart/65089272dcd5c91e2974771a",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"cart",
+								"65089272dcd5c91e2974771a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Add Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cart\": [\"650b3de6dbf77f1b4e43ab6c\"],\n    \"estimation\": \"2-4\",\n    \"ongkir\": 14000,\n    \"total\": 130000,\n    \"courier\": \"jne\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}/order",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local_url}}/order",
+							"host": [
+								"{{local_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://jersipedia.cyclic.cloud/api",
+			"type": "string"
+		},
+		{
+			"key": "local_url",
+			"value": "https://jersipedia.cyclic.cloud/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MDFiMjkxMzE1Mzg5OTJiYmJiMGVlNSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY5NTI0MzUxMywiZXhwIjoxNjk1ODQ4MzEzfQ.c-lPvGUU8RLgWdWZ-t_hB-NrbyACaX-XmwojU7PgQ-k",
+			"type": "string"
+		}
+	]
+}
