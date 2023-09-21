@@ -122,6 +122,8 @@ class _RegisterAddressState extends State<RegisterAddress> {
               ),
               TextInput(
                 controller: addressController,
+                textInputAction: TextInputAction.newline,
+                keyboardType: TextInputType.multiline,
                 placeholder: 'Address',
                 title: 'Address',
                 isMultipleLine: true,

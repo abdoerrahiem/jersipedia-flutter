@@ -5,10 +5,10 @@ import 'package:jersipedia/blocs/cart/cart_bloc.dart';
 import 'package:jersipedia/blocs/city/city_bloc.dart';
 import 'package:jersipedia/blocs/jersey/jersey_bloc.dart';
 import 'package:jersipedia/blocs/league/league_bloc.dart';
+import 'package:jersipedia/blocs/order/order_bloc.dart';
 import 'package:jersipedia/blocs/province/province_bloc.dart';
 import 'package:jersipedia/blocs/user/user_bloc.dart';
 import 'package:jersipedia/screens/cart_screen.dart';
-import 'package:jersipedia/screens/checkout_screen.dart';
 import 'package:jersipedia/screens/history_checkout_screen.dart';
 import 'package:jersipedia/screens/home_screen.dart';
 import 'package:jersipedia/screens/login_screen.dart';
@@ -40,6 +40,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => JerseySearchBloc()),
         BlocProvider(create: (context) => JerseySearchByLeagueBloc()),
         BlocProvider(create: (context) => CartBloc()),
+        BlocProvider(create: (context) => OrderBloc()),
+        BlocProvider(create: (context) => AddOrderBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -48,6 +50,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           pageTransitionsTheme: const PageTransitionsTheme(builders: {
             TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           }),
           appBarTheme: AppBarTheme(
             backgroundColor: whiteColor,
@@ -66,7 +69,6 @@ class MyApp extends StatelessWidget {
           '/register': (context) => const RegisterScreen(),
           '/home': (context) => const HomeScreen(),
           '/cart': (context) => const CartScreen(),
-          '/checkout': (context) => const CheckoutScreen(),
           '/history-checkout': (context) => const HistoryCheckoutScreen(),
           '/change-profile': (context) => const UpdateProfileScreen(),
           '/change-password': (context) => const UpdatePasswordScreen(),

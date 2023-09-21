@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/order/order_bloc.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebviewScreen extends StatelessWidget {
+class WebviewScreen extends StatefulWidget {
   final String title;
   final String uri;
+  final bool fromHistory;
 
   const WebviewScreen({
     super.key,
     required this.title,
     required this.uri,
+    this.fromHistory = false,
   });
+
+  @override
+  State<WebviewScreen> createState() => _WebviewScreenState();
+}
+
+class _WebviewScreenState extends State<WebviewScreen> {
+  bool loading = true;
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +34,39 @@ class WebviewScreen extends StatelessWidget {
             // Update loading bar.
           },
           onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
+          onPageFinished: (String url) {
+            loading = false;
+          },
+          onUrlChange: (change) {
+            loading = false;
+          },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             // if (request.url.startsWith('https://www.youtube.com/')) {
             //   return NavigationDecision.prevent;
             // }
+
+            if (request.url.contains('order_id=')) {
+              if (widget.fromHistory) {
+                Navigator.pop(context);
+                context.read<OrderBloc>().add(GetOrders());
+              } else {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/history-checkout');
+              }
+            }
+
             return NavigationDecision.navigate;
           },
         ),
       )
-      ..loadRequest(Uri.parse(uri));
+      ..loadRequest(Uri.parse(widget.uri));
 
     return Scaffold(
       backgroundColor: blueColor,
       appBar: AppBar(
         title: Text(
-          title,
+          widget.title,
           style: whiteTextStyle.copyWith(
             fontSize: 16,
             fontWeight: fontWeightBlack,
@@ -69,7 +96,13 @@ class WebviewScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: WebViewWidget(controller: controller),
+      body: Stack(
+        children: [
+          WebViewWidget(controller: controller),
+          if (loading)
+            Center(child: CircularProgressIndicator(color: whiteColor))
+        ],
+      ),
     );
   }
 }

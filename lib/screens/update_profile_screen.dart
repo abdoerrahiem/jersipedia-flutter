@@ -96,6 +96,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: blueColor,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Ubah Profil',
@@ -276,6 +277,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     const SizedBox(height: 15),
                     TextInput(
                       controller: addressController,
+                      textInputAction: TextInputAction.newline,
+                      keyboardType: TextInputType.multiline,
                       placeholder: 'Address',
                       title: 'Address',
                       isMultipleLine: true,

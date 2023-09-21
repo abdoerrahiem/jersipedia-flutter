@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jersipedia/blocs/order/order_bloc.dart';
 import 'package:jersipedia/utils/theme.dart';
 import 'package:jersipedia/widgets/history_item.dart';
+import 'package:jersipedia/widgets/loader.dart';
+import 'package:jersipedia/widgets/not_found.dart';
 
-class HistoryCheckoutScreen extends StatelessWidget {
+class HistoryCheckoutScreen extends StatefulWidget {
   const HistoryCheckoutScreen({super.key});
+
+  @override
+  State<HistoryCheckoutScreen> createState() => _HistoryCheckoutScreenState();
+}
+
+class _HistoryCheckoutScreenState extends State<HistoryCheckoutScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<OrderBloc>().add(GetOrders());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,30 +56,30 @@ class HistoryCheckoutScreen extends StatelessWidget {
           ],
         ),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          vertical: 15,
-        ),
-        children: [
-          HistoryItem(
-            name: 'Real Madrid 3rd 2023/2024',
-            price: 50000,
-            size: 'XL',
-            qty: 2,
-            imageUrl:
-                'https://images.unsplash.com/photo-1635710064268-69aa5d9355c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJlYWwlMjBtYWRyaWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60',
-            onDelete: () {},
-          ),
-          HistoryItem(
-            name: 'Real Madrid 3rd 2023/2024',
-            price: 50000,
-            size: 'XL',
-            qty: 2,
-            imageUrl:
-                'https://images.unsplash.com/photo-1635710064268-69aa5d9355c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJlYWwlMjBtYWRyaWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60',
-            onDelete: () {},
-          ),
-        ],
+      body: BlocConsumer<OrderBloc, OrderState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return state is GetOrdersLoading
+              ? Center(
+                  child: Loader(
+                    color: whiteColor,
+                  ),
+                )
+              : state is GetOrdersSuccess && state.data.isNotEmpty
+                  ? ListView(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 15,
+                      ),
+                      children: state.data
+                          .map(
+                            (item) => HistoryItem(
+                              data: item,
+                            ),
+                          )
+                          .toList(),
+                    )
+                  : const NotFound(title: 'Your history checkout is empty.');
+        },
       ),
     );
   }

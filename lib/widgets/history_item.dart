@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:jersipedia/models/order_history_model.dart';
+import 'package:jersipedia/screens/webview_screen.dart';
 import 'package:jersipedia/utils/function.dart';
 import 'package:jersipedia/utils/theme.dart';
+// import 'package:intl/intl.dart';
 
 class HistoryItem extends StatelessWidget {
-  final String name;
-  final num price;
-  final String size;
-  final num qty;
-  final String imageUrl;
-  final VoidCallback onDelete;
+  final OrderHistoryModel data;
 
-  const HistoryItem({
-    super.key,
-    required this.name,
-    required this.price,
-    required this.size,
-    required this.qty,
-    required this.imageUrl,
-    required this.onDelete,
-  });
+  const HistoryItem({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +31,8 @@ class HistoryItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Senin, 24 Juli 2023',
+            DateFormat('EEEE, d MMM yyyy', 'id')
+                .format(DateTime.parse(data.createdAt.toString())),
             style: whiteTextStyle.copyWith(
               fontWeight: fontWeightSemiBold,
               fontSize: 16,
@@ -48,7 +40,7 @@ class HistoryItem extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Column(
-            children: [1, 2, 3]
+            children: data.cart!
                 .map(
                   (e) => Container(
                     margin: const EdgeInsets.only(bottom: 10),
@@ -65,56 +57,58 @@ class HistoryItem extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            imageUrl,
+                            e.jerseyImage.toString(),
                             width: 60,
                             height: 60,
                             fit: BoxFit.fill,
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              name,
-                              style: whiteTextStyle.copyWith(
-                                fontWeight: fontWeightSemiBold,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                e.jerseyTitle.toString(),
+                                style: whiteTextStyle.copyWith(
+                                  fontWeight: fontWeightSemiBold,
+                                ),
                               ),
-                            ),
-                            Text(
-                              formatRupiah(price),
-                              style: whiteTextStyle.copyWith(),
-                            ),
-                            const SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Text(
-                                  'Jumlah: ',
-                                  style: whiteTextStyle.copyWith(),
-                                ),
-                                Text(
-                                  '$qty',
-                                  style: whiteTextStyle.copyWith(
-                                    fontWeight: fontWeightSemiBold,
+                              Text(
+                                formatRupiah(e.jerseyPrice!),
+                                style: whiteTextStyle.copyWith(),
+                              ),
+                              const SizedBox(height: 5),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Jumlah: ',
+                                    style: whiteTextStyle.copyWith(),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Total Harga: ',
-                                  style: whiteTextStyle.copyWith(),
-                                ),
-                                Text(
-                                  formatRupiah(qty * price),
-                                  style: whiteTextStyle.copyWith(
-                                    fontWeight: fontWeightSemiBold,
+                                  Text(
+                                    '${e.amount}',
+                                    style: whiteTextStyle.copyWith(
+                                      fontWeight: fontWeightSemiBold,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Total Harga: ',
+                                    style: whiteTextStyle.copyWith(),
+                                  ),
+                                  Text(
+                                    formatRupiah(e.total!),
+                                    style: whiteTextStyle.copyWith(
+                                      fontWeight: fontWeightSemiBold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -133,7 +127,11 @@ class HistoryItem extends StatelessWidget {
                 ),
               ),
               Text(
-                'Lunas',
+                data.status == 'pending'
+                    ? 'Pending'
+                    : data.status == 'settlement'
+                        ? 'Lunas'
+                        : 'Kadaluarsa',
                 style: whiteTextStyle.copyWith(
                   fontWeight: fontWeightSemiBold,
                 ),
@@ -145,14 +143,14 @@ class HistoryItem extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Ongkir (2-3 hari):',
+                  'Ongkir (${data.estimation} hari):',
                   style: whiteTextStyle.copyWith(
                     fontWeight: fontWeightSemiBold,
                   ),
                 ),
               ),
               Text(
-                'Rp 15.000',
+                formatRupiah(data.ongkir!),
                 style: whiteTextStyle.copyWith(
                   fontWeight: fontWeightSemiBold,
                 ),
@@ -171,13 +169,53 @@ class HistoryItem extends StatelessWidget {
                 ),
               ),
               Text(
-                'Rp 215.000',
+                formatRupiah(data.total!),
                 style: whiteTextStyle.copyWith(
                   fontWeight: fontWeightSemiBold,
                 ),
               ),
             ],
-          )
+          ),
+          if (data.status == 'pending')
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: TextButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WebviewScreen(
+                          title: 'Lanjutkan Pembayaran',
+                          uri: data.paymentLink.toString(),
+                          fromHistory: true,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.payment,
+                    color: blueColor,
+                    size: 16,
+                  ),
+                  label: Text(
+                    'Lanjutkan pembayaran',
+                    style: blueTextStyle.copyWith(fontSize: 14),
+                  ),
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.symmetric(
+                        horizontal: 15,
+                      ),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(whiteColor),
+                    overlayColor: MaterialStateProperty.all<Color>(greyColor),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );

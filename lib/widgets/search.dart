@@ -41,6 +41,7 @@ class _SearchState extends State<Search> {
                     ),
                     child: TextInput(
                       controller: searchController,
+                      textInputAction: TextInputAction.search,
                       placeholder: 'Cari Jersey...',
                       lelftIcon: const Icon(
                         Icons.search,

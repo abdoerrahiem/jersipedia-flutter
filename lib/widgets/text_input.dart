@@ -16,6 +16,7 @@ class TextInput extends StatelessWidget {
   final Color? borderColor;
   final Color? backgroundColor;
   final Function(String)? onSubmit;
+  final TextInputAction? textInputAction;
 
   const TextInput({
     super.key,
@@ -33,6 +34,7 @@ class TextInput extends StatelessWidget {
     this.borderColor,
     this.backgroundColor,
     this.onSubmit,
+    this.textInputAction,
   });
 
   @override
@@ -55,6 +57,7 @@ class TextInput extends StatelessWidget {
         TextFormField(
           controller: controller,
           keyboardType: keyboardType ?? TextInputType.text,
+          textInputAction: textInputAction ?? TextInputAction.done,
           maxLines: isMultipleLine ? null : 1,
           minLines: minLine,
           obscureText: isPassword,
