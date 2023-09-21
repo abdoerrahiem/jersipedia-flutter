@@ -22,7 +22,7 @@
 ## Video
 
 <video width="315" height="723" controls>
-  <source src="assets/files/recording.mov" type="video/mov">
+  <source src="assets/files/recording.mov" type="video/mp4">
 </video>
 
 ## Design
