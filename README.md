@@ -5,14 +5,10 @@
 <table>
   <tr>
     <td>Login</td>
-    <td>Register</td>
     <td>Home</td>
     <td>Search</td>
-    <td>Profile</td>
     <td>Cart</td>
-    <td>Checkout</td>
     <td>Payment</td>
-    <td>History</td>
   </tr>
   <tr>
     <td><img src="assets/files/login.png" width=270 height=480></td>
