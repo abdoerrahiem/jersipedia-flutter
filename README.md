@@ -21,9 +21,7 @@
 
 ## Video
 
-<video width="315" height="723" controls>
-  <source src="assets/files/recording.mov" type="video/mp4">
-</video>
+https://github.com/abdoerrahiem/jersipedia-flutter/assets/54793608/c19094f6-519b-4bdb-bb7e-7e94508dc3be
 
 ## Design
 
