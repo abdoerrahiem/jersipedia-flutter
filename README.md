@@ -36,7 +36,7 @@ https://github.com/abdoerrahiem/jersipedia_api_nodejs
 ## API Documentation
 
 - https://documenter.getpostman.com/view/9048970/2s9YCARqeY
-- https://github.com/abdoerrahiem/jersipedia-flutter/tree/main/assets/files/JersiPedia API.postman_collection.json
+- https://github.com/abdoerrahiem/jersipedia-flutter/blob/main/assets/files/JersiPedia%20API.postman_collection.json
 
 ## APK Release
 
