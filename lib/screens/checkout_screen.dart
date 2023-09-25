@@ -136,7 +136,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => WebviewScreen(
-                    title: 'Lanjutkan Pembayaran',
+                    title: 'Continue Payment',
                     uri: state.data.toString(),
                   ),
                 ),
@@ -168,7 +168,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Alamat: ',
+                          'Address: ',
                           style: whiteTextStyle.copyWith(
                             fontWeight: fontWeightSemiBold,
                           ),
@@ -196,7 +196,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                               ),
                             ),
                             child: Text(
-                              'Ubah Alamat',
+                              'Change Address',
                               style: whiteTextStyle.copyWith(),
                             ),
                           ),
@@ -232,7 +232,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                         ),
                         const SizedBox(height: 25),
                         Text(
-                          'Pilih Ekspedisi: ',
+                          'Choose Expedition: ',
                           style: whiteTextStyle.copyWith(
                             fontWeight: fontWeightSemiBold,
                             fontSize: 16,
@@ -298,7 +298,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Biaya Ongkir: ',
+                                'Shipping Costs: ',
                                 style: whiteTextStyle.copyWith(
                                   fontWeight: fontWeightSemiBold,
                                   fontSize: 16,
@@ -309,7 +309,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Berat ${widget.weight} kg',
+                                      'Weight ${widget.weight} kg',
                                       style: whiteTextStyle.copyWith(
                                         fontSize: 16,
                                       ),
@@ -329,14 +329,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Estimasi Waktu',
+                                      'Time Estimation',
                                       style: whiteTextStyle.copyWith(
                                         fontSize: 16,
                                       ),
                                     ),
                                   ),
                                   Text(
-                                    '${orderState.data.etd!.replaceAll('HARI', '')} hari',
+                                    '${orderState.data.etd!.replaceAll('HARI', '')} day(s)',
                                     style: whiteTextStyle.copyWith(
                                       fontWeight: fontWeightSemiBold,
                                       fontSize: 16,
@@ -370,7 +370,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Total Harga:',
+                              'Total Price:',
                               style: greyTextStyle.copyWith(fontSize: 16),
                             ),
                             Text(
@@ -391,7 +391,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           label: Row(
                             children: [
                               Text(
-                                'Bayar',
+                                'Pay',
                                 style: whiteTextStyle.copyWith(fontSize: 16),
                               ),
                               if (addOrderState is AddOrderLoading)

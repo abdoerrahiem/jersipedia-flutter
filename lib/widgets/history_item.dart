@@ -4,7 +4,6 @@ import 'package:jersipedia/models/order_history_model.dart';
 import 'package:jersipedia/screens/webview_screen.dart';
 import 'package:jersipedia/utils/function.dart';
 import 'package:jersipedia/utils/theme.dart';
-// import 'package:intl/intl.dart';
 
 class HistoryItem extends StatelessWidget {
   final OrderHistoryModel data;
@@ -31,7 +30,7 @@ class HistoryItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            DateFormat('EEEE, d MMM yyyy', 'id')
+            DateFormat('EEEE, d MMM yyyy', 'en-US')
                 .format(DateTime.parse(data.createdAt.toString())),
             style: whiteTextStyle.copyWith(
               fontWeight: fontWeightSemiBold,
@@ -47,13 +46,6 @@ class HistoryItem extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '1. ',
-                          style: whiteTextStyle.copyWith(
-                            fontWeight: fontWeightSemiBold,
-                          ),
-                        ),
-                        const SizedBox(width: 5),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
@@ -82,7 +74,7 @@ class HistoryItem extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    'Jumlah: ',
+                                    'Amount: ',
                                     style: whiteTextStyle.copyWith(),
                                   ),
                                   Text(
@@ -96,7 +88,7 @@ class HistoryItem extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    'Total Harga: ',
+                                    'Total Price: ',
                                     style: whiteTextStyle.copyWith(),
                                   ),
                                   Text(
@@ -130,8 +122,8 @@ class HistoryItem extends StatelessWidget {
                 data.status == 'pending'
                     ? 'Pending'
                     : data.status == 'settlement'
-                        ? 'Lunas'
-                        : 'Kadaluarsa',
+                        ? 'Paid'
+                        : 'Expired',
                 style: whiteTextStyle.copyWith(
                   fontWeight: fontWeightSemiBold,
                 ),
@@ -143,7 +135,7 @@ class HistoryItem extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Ongkir (${data.estimation} hari):',
+                  'Shipping (${data.estimation} day(s)):',
                   style: whiteTextStyle.copyWith(
                     fontWeight: fontWeightSemiBold,
                   ),
@@ -162,7 +154,7 @@ class HistoryItem extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Total Harga:',
+                  'Total Price:',
                   style: whiteTextStyle.copyWith(
                     fontWeight: fontWeightSemiBold,
                   ),
@@ -187,7 +179,7 @@ class HistoryItem extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => WebviewScreen(
-                          title: 'Lanjutkan Pembayaran',
+                          title: 'Continue Payment',
                           uri: data.paymentLink.toString(),
                           fromHistory: true,
                         ),
@@ -200,7 +192,7 @@ class HistoryItem extends StatelessWidget {
                     size: 16,
                   ),
                   label: Text(
-                    'Lanjutkan pembayaran',
+                    'Continue Payment',
                     style: blueTextStyle.copyWith(fontSize: 14),
                   ),
                   style: ButtonStyle(

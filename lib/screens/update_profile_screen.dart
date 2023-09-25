@@ -99,7 +99,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          'Ubah Profil',
+          'Update Profile',
           style: whiteTextStyle.copyWith(
             fontSize: 16,
             fontWeight: fontWeightBlack,
@@ -238,7 +238,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Ubah Photo',
+                              'Change Photo',
                               style: whiteTextStyle.copyWith(),
                             ),
                             if (userState is UpdatePhotoProfileLoading)
@@ -402,7 +402,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              'Simpan',
+                              'Save',
                               style: whiteTextStyle.copyWith(fontSize: 16),
                             ),
                             if (userState is UpdateProfileLoading)

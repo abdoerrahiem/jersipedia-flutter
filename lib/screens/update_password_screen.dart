@@ -50,7 +50,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
       backgroundColor: blueColor,
       appBar: AppBar(
         title: Text(
-          'Ubah Password',
+          'Update Password',
           style: whiteTextStyle.copyWith(
             fontSize: 16,
             fontWeight: fontWeightBlack,
@@ -106,22 +106,22 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                 children: [
                   TextInput(
                     controller: oldPasswordController,
-                    placeholder: 'Password Lama',
-                    title: 'Password Lama',
+                    placeholder: 'Old Password',
+                    title: 'Old Password',
                     isPassword: true,
                   ),
                   const SizedBox(height: 15),
                   TextInput(
                     controller: newPasswordController,
-                    placeholder: 'Password Baru',
-                    title: 'Password Baru',
+                    placeholder: 'New Password',
+                    title: 'New Password',
                     isPassword: true,
                   ),
                   const SizedBox(height: 15),
                   TextInput(
                     controller: confirmPasswordController,
-                    placeholder: 'Konfirmasi Password Baru',
-                    title: 'Konfirmasi Password Baru',
+                    placeholder: 'Confirm New Password',
+                    title: 'Confirm New Password',
                     isPassword: true,
                   ),
                   const SizedBox(height: 100),
@@ -151,7 +151,7 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Simpan',
+                            'Save',
                             style: whiteTextStyle.copyWith(fontSize: 16),
                           ),
                           if (userState is UpdatePasswordLoading)

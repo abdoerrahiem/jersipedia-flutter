@@ -133,7 +133,7 @@ class _RegisterAddressState extends State<RegisterAddress> {
               const SizedBox(height: 20),
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
-                child: Text('Provinsi', style: whiteTextStyle.copyWith()),
+                child: Text('Province', style: whiteTextStyle.copyWith()),
               ),
               if (provinceState is ProvinceSuccess && provinceId.isNotEmpty)
                 Container(

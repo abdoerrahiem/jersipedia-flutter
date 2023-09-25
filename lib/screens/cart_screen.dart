@@ -185,7 +185,7 @@ class _CartScreenState extends State<CartScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Total Harga:',
+                                            'Total Price:',
                                             style: greyTextStyle.copyWith(
                                                 fontSize: 16),
                                           ),

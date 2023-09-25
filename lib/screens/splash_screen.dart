@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     getToken();
-    initializeDateFormatting('id');
+    initializeDateFormatting('en-US');
   }
 
   @override

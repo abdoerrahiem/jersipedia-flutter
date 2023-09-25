@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        'Belum punya akun?',
+                        "Don't have an account?",
                         style: whiteTextStyle.copyWith(),
                       ),
                     ),

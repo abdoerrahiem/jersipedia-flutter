@@ -113,28 +113,28 @@ Widget profileButtons(BuildContext context) {
       const SizedBox(height: 20),
       ProfileButton(
         icon: Icons.manage_accounts,
-        title: 'Ubah Profil',
+        title: 'Update Profile',
         onPress: () {
           Navigator.pushNamed(context, '/change-profile');
         },
       ),
       ProfileButton(
         icon: Icons.lock,
-        title: 'Ubah Password',
+        title: 'Update Password',
         onPress: () {
           Navigator.pushNamed(context, '/change-password');
         },
       ),
       ProfileButton(
         icon: Icons.history,
-        title: 'History Checkout',
+        title: 'Checkout Histories',
         onPress: () {
           Navigator.pushNamed(context, '/history-checkout');
         },
       ),
       ProfileButton(
         icon: Icons.logout,
-        title: 'Keluar',
+        title: 'Logout',
         onPress: () async {
           const storage = FlutterSecureStorage();
           await storage.deleteAll();

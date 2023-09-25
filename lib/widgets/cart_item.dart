@@ -67,7 +67,7 @@ class CartItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Jumlah: ',
+                          'Amount: ',
                           style: whiteTextStyle.copyWith(),
                         ),
                         Text(
@@ -81,7 +81,7 @@ class CartItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Ukuran: ',
+                          'Size: ',
                           style: whiteTextStyle.copyWith(),
                         ),
                         Text(
@@ -95,7 +95,7 @@ class CartItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'Total Harga: ',
+                          'Total Price: ',
                           style: whiteTextStyle.copyWith(),
                         ),
                         Text(

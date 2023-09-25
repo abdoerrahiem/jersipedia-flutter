@@ -26,7 +26,7 @@ class _HistoryCheckoutScreenState extends State<HistoryCheckoutScreen> {
       backgroundColor: blueColor,
       appBar: AppBar(
         title: Text(
-          'History Checkout',
+          'Checkout Histories',
           style: whiteTextStyle.copyWith(
             fontSize: 16,
             fontWeight: fontWeightBlack,

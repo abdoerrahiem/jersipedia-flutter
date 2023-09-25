@@ -76,7 +76,7 @@ Widget homeHeader(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Selamat Datang,',
+                      'Welcome,',
                       style: blackTextStyle.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -175,14 +175,14 @@ Widget homeLeague(BuildContext context, Function(int) setIndex) {
                     child: Row(
                       children: [
                         Text(
-                          'Pilih ',
+                          'Choose ',
                           style: blackTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: fontWeightBold,
                           ),
                         ),
                         Text(
-                          'Liga',
+                          'a League',
                           style: whiteTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: fontWeightBold,
@@ -247,7 +247,7 @@ Widget homeProducts(BuildContext context) {
                   child: Row(
                     children: [
                       Text(
-                        'Pilih ',
+                        'Choose ',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: fontWeightBold,
@@ -261,7 +261,7 @@ Widget homeProducts(BuildContext context) {
                         ),
                       ),
                       Text(
-                        'yang kamu inginkan',
+                        'as you want',
                         style: blackTextStyle.copyWith(
                           fontSize: 14,
                           fontWeight: fontWeightBold,

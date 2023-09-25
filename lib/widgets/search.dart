@@ -42,7 +42,7 @@ class _SearchState extends State<Search> {
                     child: TextInput(
                       controller: searchController,
                       textInputAction: TextInputAction.search,
-                      placeholder: 'Cari Jersey...',
+                      placeholder: 'Search jersey...',
                       lelftIcon: const Icon(
                         Icons.search,
                         size: 30,
@@ -161,7 +161,7 @@ Widget searchResult(BuildContext context) {
                   child: Row(
                     children: [
                       Text(
-                        'Hasil Pencarian ',
+                        'Search result ',
                         style: blackTextStyle.copyWith(),
                       ),
                       Text(
